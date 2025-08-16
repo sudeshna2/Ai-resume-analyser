@@ -31,7 +31,7 @@ const Upload = () =>{
         if (!imageFile.file) return setStatusText('Error:Failed to convert image');
         setStatusText('uploading the image');
 
-        const uploadedImage = await fs.upload(imageFile.file);
+        const uploadedImage = await fs.upload([imageFile.file]);
         if (!uploadedImage) return setStatusText('Error:Failed to upload image');
         setStatusText('processing the data...');
 
@@ -58,6 +58,7 @@ const Upload = () =>{
         await kv.set(`resume:${uuid}`,JSON.stringify(data));
         setStatusText('Analysis completed.Redirecting..');
         console.log(data)
+        navigate(`/resume/${uuid}`);
     }
 
     const handlesubmit =(e:FormEvent<HTMLFormElement>)=>{
